@@ -11,7 +11,7 @@ const contacts = [
   { label: "[email]", href: "mailto:ramasyasachin@gmail.com" },
   { label: "[linkedin]", href: "https://linkedin.com/in/sachinwhocodes" },
   { label: "[github]", href: "https://github.com/sachinwhocodes" },
-  { label: "[resume]", href: "/resume.pdf", download: true },
+  { label: "[resume]", href: "/Sachin_Verma_Resume.pdf", download: true },
 ];
 
 export default function Home() {
