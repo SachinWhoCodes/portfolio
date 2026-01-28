@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+
+/* IDE/Code Editor Inspired Design System */
+
+@layer base {
+  :root {
+    /* Deep black theme - no gradients, no shadows */
+    --background: 0 0% 3.1%; /* #080808 */
+    --foreground: 0 0% 93%; /* Off-white for high contrast */
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 93%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 93%;
+
+    /* Accent color - subtle blue for links/active states */
+    --primary: 210 100% 60%;
+    --primary-foreground: 0 0% 3.1%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 70%;
+
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 50%; /* Dimmed gray for secondary text */
+
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 93%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 93%;
+
+    /* Thin subdued borders */
+    --border: 0 0% 13.3%; /* #222 */
+    --input: 0 0% 13.3%;
+    --ring: 210 100% 60%;
+
+    --radius: 0.25rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 70%;
+    --sidebar-primary: 210 100% 60%;
+    --sidebar-primary-foreground: 0 0% 3.1%;
+    --sidebar-accent: 0 0% 8%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-border: 0 0% 13.3%;
+    --sidebar-ring: 210 100% 60%;
+
+    /* Custom tokens */
+    --text-dimmed: 0 0% 50%;
+    --text-bright: 0 0% 100%;
+    --border-subtle: 0 0% 13.3%;
+    --surface-raised: 0 0% 6%;
+    
+    /* Font families */
+    --font-mono: "JetBrains Mono", monospace;
+    --font-sans: "Inter", sans-serif;
+  }
+
+  /* No separate dark mode - always dark */
+  .dark {
+    --background: 0 0% 3.1%;
+    --foreground: 0 0% 93%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 93%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 0 0% 3.1%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 70%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 50%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 93%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 93%;
+    --border: 0 0% 13.3%;
+    --input: 0 0% 13.3%;
+    --ring: 210 100% 60%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 70%;
+    --sidebar-primary: 210 100% 60%;
+    --sidebar-primary-foreground: 0 0% 3.1%;
+    --sidebar-accent: 0 0% 8%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-border: 0 0% 13.3%;
+    --sidebar-ring: 210 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  /* Monospace for navigation, headers, metadata */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  /* Custom scrollbar for IDE feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  /* Tab navigation styles */
+  .tab-item {
+    @apply px-4 py-2 font-mono text-sm text-muted-foreground border-b border-transparent transition-colors;
+  }
+
+  .tab-item:hover {
+    @apply text-foreground;
+  }
+
+  .tab-item.active {
+    @apply text-foreground border-b-primary;
+  }
+
+  /* Text link style */
+  .text-link {
+    @apply text-primary hover:underline font-mono text-sm cursor-pointer transition-colors;
+  }
+
+  /* Metadata style */
+  .metadata {
+    @apply font-mono text-xs text-muted-foreground;
+  }
+
+  /* Section container */
+  .section-container {
+    @apply border border-border p-6;
+  }
+
+  /* List item with subtle border */
+  .list-item {
+    @apply border-b border-border py-4 last:border-b-0;
+  }
+
+  /* Tag/badge style */
+  .tech-tag {
+    @apply inline-block font-mono text-xs px-2 py-0.5 border border-border text-muted-foreground mr-2 mb-1;
+  }
+}
