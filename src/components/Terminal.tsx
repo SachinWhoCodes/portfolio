@@ -237,6 +237,7 @@ export function Terminal() {
   const [lines, setLines] = useState<TerminalLine[]>(WELCOME_LINES);
   const [input, setInput] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -250,6 +251,29 @@ export function Terminal() {
   useEffect(() => {
     scrollToBottom();
   }, [lines, scrollToBottom]);
+
+  // Escape to exit fullscreen
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setIsFullscreen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+
+    // Auto-focus input when entering fullscreen
+    inputRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isFullscreen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -286,20 +310,25 @@ export function Terminal() {
             <span className="dot dot-green" />
           </div>
           <span className="terminal-title">terminal — sachin@portfolio</span>
-          <button
-            className="terminal-toggle"
-            onClick={() => setIsCollapsed(false)}
-            aria-label="Expand terminal"
-          >
-            ▲
-          </button>
+          <div className="terminal-controls">
+            <button
+              className="terminal-toggle"
+              onClick={() => setIsCollapsed(false)}
+              aria-label="Expand terminal"
+            >
+              ▲
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="terminal-window" onClick={focusInput}>
+    <div
+      className={`terminal-window ${isFullscreen ? "terminal-fullscreen" : ""}`}
+      onClick={focusInput}
+    >
       <div className="terminal-header">
         <div className="terminal-dots">
           <span className="dot dot-red" />
@@ -307,16 +336,31 @@ export function Terminal() {
           <span className="dot dot-green" />
         </div>
         <span className="terminal-title">terminal — sachin@portfolio</span>
-        <button
-          className="terminal-toggle"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsCollapsed(true);
-          }}
-          aria-label="Collapse terminal"
-        >
-          ▼
-        </button>
+        <div className="terminal-controls">
+          <button
+            className="terminal-toggle"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsFullscreen((prev) => !prev);
+            }}
+            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            title={isFullscreen ? "Exit fullscreen (Esc)" : "Fullscreen"}
+          >
+            {isFullscreen ? "⊡" : "⊞"}
+          </button>
+          {!isFullscreen && (
+            <button
+              className="terminal-toggle"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsCollapsed(true);
+              }}
+              aria-label="Collapse terminal"
+            >
+              ▼
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="terminal-body" ref={scrollRef}>
@@ -340,6 +384,14 @@ export function Terminal() {
           />
         </form>
       </div>
+
+      {isFullscreen && (
+        <div className="terminal-footer">
+          <span className="font-mono text-xs text-muted-foreground">
+            Press <kbd className="cmd-kbd">Esc</kbd> to exit fullscreen
+          </span>
+        </div>
+      )}
     </div>
   );
 }
