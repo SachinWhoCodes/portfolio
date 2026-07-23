@@ -1,10 +1,22 @@
 import { Layout } from "@/components/layout/Layout";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
+import { Terminal } from "@/components/Terminal";
+import { GitHubActivity } from "@/components/GitHubActivity";
 
 const techStack = {
-  languages: ["Java", "TypeScript", "JavaScript", "SQL", "Python", "C++"],
-  backend: ["Node.js", "GraphQL", "REST APIs", "Firebase", "AWS", "Vercel"],
-  tools: ["Git", "Docker", "Linux", "JGit", "Picocli", "Tailwind CSS"],
+  languages: ["TypeScript", "JavaScript", "Java", "Python", "C++", "SQL"],
+  backend: [
+    "Node.js",
+    "Express",
+    "Fastify",
+    "GraphQL",
+    "REST",
+    "OAuth 2.0",
+  ],
+  frontend: ["React", "Next.js", "React Native", "Vite", "Redux", "Tailwind CSS"],
+  databases: ["PostgreSQL", "MySQL", "MongoDB", "Firebase", "Firestore"],
+  cloud: ["AWS", "GCP", "Docker", "Vercel", "CI/CD"],
+  tools: ["Git", "GitHub", "Linux/Bash", "JGit", "AES-256-GCM", "RSA-OAEP"],
 };
 
 const contacts = [
@@ -14,72 +26,58 @@ const contacts = [
   { label: "[resume]", href: "/Sachin_Verma_Resume.pdf", download: true },
 ];
 
+const achievements = [
+  "1st Runner-up — Symbiosis Skill Hackathon '26 (National Level)",
+  "Finalist — Hackatron (powered by GitHub)",
+  "4th Position — Code Coalescence 2025 (MITSDU Official Hackathon)",
+];
+
 export default function Home() {
   return (
     <Layout>
       <Breadcrumb items={[{ label: "home" }]} />
 
-      <article className="max-w-3xl">
+      <article className="max-w-3xl page-fade-in">
         {/* Header */}
         <header className="mb-12">
-          <h1 className="text-2xl font-semibold text-foreground mb-2">
+          <h1 className="text-2xl font-semibold text-foreground mb-1">
             Sachin Verma
+            <span className="cursor-blink" />
           </h1>
           <p className="font-mono text-sm text-muted-foreground">
-            He/Him • Software Engineer Intern @ Drippr • Lead @ SAGIT Research
+            Full Stack Developer Intern @ TalkFever · Founder @ Acadable Labs ·
+            BTech IT '27
           </p>
         </header>
 
-        {/* About Section */}
+        {/* About */}
         <section className="mb-12">
           <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
             // about
           </h2>
           <div className="font-sans text-foreground/90 leading-relaxed space-y-4">
             <p>
-              I am a Software Engineer and Researcher focused on building scalable, 
-              local-first systems and high-performance full-stack applications. 
-              Currently, I am a Software Engineer Intern at Drippr, where I architect 
-              real-time dashboard solutions and financial integrity systems for merchant operations.
+              Software engineer building backend infrastructure at TalkFever for
+              13.8M users — payment systems, content architecture, and real-time
+              data pipelines on PostgreSQL. Previously built merchant dashboards
+              at Drippr, led a 6-person dev team at Spedee, and shipped freelance
+              apps on Upwork.
             </p>
             <p>
-              My technical background is rooted in bridging the "semantic gap" in software 
-              development. As the Project Lead for SAGIT, a research initiative under the 
-              HOD of Information Technology at MITS, I engineered a lightweight Java CLI 
-              that extends Git with AST-based semantic analysis to automate documentation 
-              and ensure 100% data integrity.
+              Outside of work, I run Acadable Labs where I build and publish
+              developer tools — LazyServe and PackShell are live on npm. My
+              research background is in semantic code analysis (SAGIT), bridging
+              the gap between what Git tracks and what code actually means.
             </p>
           </div>
         </section>
 
-        {/* Key Strengths */}
+        {/* Terminal */}
         <section className="mb-12">
           <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
-            // capabilities
+            // terminal
           </h2>
-          <ul className="space-y-3 font-sans text-foreground/90">
-            <li className="flex">
-              <span className="font-mono text-muted-foreground mr-3">→</span>
-              <span>
-                <strong className="text-foreground">Full-Stack & Mobile:</strong>{" "}
-                Founder of Acadable.com (3,000+ users), multi-tenant SaaS platforms with React, React Native, Firebase.
-              </span>
-            </li>
-            <li className="flex">
-              <span className="font-mono text-muted-foreground mr-3">→</span>
-              <span>
-                <strong className="text-foreground">System Reliability:</strong>{" "}
-                0% duplicate transaction rates, 100% exam recovery success in high-concurrency environments.
-              </span>
-            </li>
-            <li className="flex">
-              <span className="font-mono text-muted-foreground mr-3">→</span>
-              <span>
-                <strong className="text-foreground">Optimization:</strong>{" "}
-                30% API latency reduction, 40% documentation time reduction through automation.
-              </span>
-            </li>
-          </ul>
+          <Terminal />
         </section>
 
         {/* Tech Stack */}
@@ -87,20 +85,59 @@ export default function Home() {
           <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
             // stack
           </h2>
-          <div className="border border-border p-6 font-mono text-sm">
-            <div className="mb-4">
-              <span className="text-muted-foreground">languages:</span>{" "}
-              <span className="text-foreground">{techStack.languages.join(", ")}</span>
-            </div>
-            <div className="mb-4">
-              <span className="text-muted-foreground">backend:</span>{" "}
-              <span className="text-foreground">{techStack.backend.join(", ")}</span>
-            </div>
-            <div>
-              <span className="text-muted-foreground">tools:</span>{" "}
-              <span className="text-foreground">{techStack.tools.join(", ")}</span>
+          <div className="border border-border p-6 font-mono text-sm space-y-3">
+            {Object.entries(techStack).map(([key, values]) => (
+              <div key={key} className="flex flex-wrap">
+                <span className="text-muted-foreground w-24 shrink-0">
+                  {key}:
+                </span>
+                <span className="text-foreground">{values.join(", ")}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Achievements */}
+        <section className="mb-12">
+          <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
+            // achievements
+          </h2>
+          <ul className="space-y-3 font-sans text-foreground/90">
+            {achievements.map((a, i) => (
+              <li key={i} className="flex">
+                <span className="font-mono text-muted-foreground mr-3">→</span>
+                <span>{a}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Education */}
+        <section className="mb-12">
+          <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
+            // education
+          </h2>
+          <div className="border border-border p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+              <div>
+                <p className="font-mono text-base text-foreground">
+                  Madhav Institute of Technology and Science
+                </p>
+                <p className="font-mono text-sm text-muted-foreground">
+                  Bachelor of Technology — Information Technology
+                </p>
+              </div>
+              <div className="font-mono text-xs text-muted-foreground text-right whitespace-nowrap">
+                <p>Aug 2023 – Jun 2027</p>
+                <p className="text-foreground mt-1">CGPA: 8.09 / 10.0</p>
+              </div>
             </div>
           </div>
+        </section>
+
+        {/* GitHub Activity */}
+        <section className="mb-12">
+          <GitHubActivity />
         </section>
 
         {/* Contact */}
@@ -113,8 +150,10 @@ export default function Home() {
               <a
                 key={contact.label}
                 href={contact.href}
-                {...(contact.download ? { download: "Sachin_Verma_Resume.pdf" } : { target: "_blank", rel: "noopener noreferrer" })}
-                className="text-primary hover:underline"
+                {...(contact.download
+                  ? { download: "Sachin_Verma_Resume.pdf" }
+                  : { target: "_blank", rel: "noopener noreferrer" })}
+                className="text-primary hover:underline link-hover"
               >
                 {contact.label}
               </a>

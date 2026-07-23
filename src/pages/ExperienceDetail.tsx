@@ -1,6 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
+import { ExternalLink } from "lucide-react";
 import { experiences } from "@/data/experience";
 
 export default function ExperienceDetail() {
@@ -21,7 +22,7 @@ export default function ExperienceDetail() {
         ]}
       />
 
-      <article className="max-w-3xl">
+      <article className="max-w-3xl page-fade-in">
         {/* Header */}
         <header className="mb-12">
           <h1 className="text-2xl font-semibold text-foreground mb-2">
@@ -30,9 +31,26 @@ export default function ExperienceDetail() {
           <div className="font-mono text-sm text-muted-foreground space-y-1">
             <p>{experience.company}</p>
             <p>
-              {experience.date} • {experience.location}
+              {experience.date} · {experience.location}
             </p>
           </div>
+
+          {experience.links && experience.links.length > 0 && (
+            <div className="flex gap-4 mt-4">
+              {experience.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-link inline-flex items-center gap-1.5 link-hover"
+                >
+                  <ExternalLink size={12} />
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
         </header>
 
         {/* Summary */}
@@ -65,6 +83,33 @@ export default function ExperienceDetail() {
             </ul>
           </div>
         </section>
+
+        {/* The Hard Part — Case Study */}
+        {experience.hardPart && (
+          <section className="mb-10">
+            <h2 className="font-mono text-sm text-muted-foreground mb-4 uppercase tracking-wider">
+              // the hard part
+            </h2>
+            <div className="border border-border">
+              <div className="p-6 border-b border-border">
+                <h3 className="font-mono text-xs text-muted-foreground uppercase tracking-wider mb-3">
+                  Problem
+                </h3>
+                <p className="font-sans text-foreground/90 leading-relaxed">
+                  {experience.hardPart.problem}
+                </p>
+              </div>
+              <div className="p-6">
+                <h3 className="font-mono text-xs text-muted-foreground uppercase tracking-wider mb-3">
+                  Solution
+                </h3>
+                <p className="font-sans text-foreground/90 leading-relaxed">
+                  {experience.hardPart.solution}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Tech Stack */}
         <section>
