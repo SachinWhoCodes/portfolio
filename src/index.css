@@ -2,660 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
-@import "@fontsource/jetbrains-mono/600.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-
-/* ============================================================
-   DESIGN SYSTEM — IDE / Code Editor Inspired
-   ============================================================ */
-
+/* Semi-dark palette. The remaining shadcn tokens map onto these five so the
+   unused components in ui/ still resolve. */
 @layer base {
   :root {
-    --background: 0 0% 3.1%;
-    --foreground: 0 0% 93%;
+    --background: 240 3.1% 12.5%; /* #1f1f21 */
+    --foreground: 36 9.8% 90%; /* #e8e6e3 */
+    --muted-foreground: 40 3.2% 62.7%; /* #a3a19d */
+    --meta: 40 2.5% 52.9%; /* #8a8884 */
+    --border: 240 2.9% 20.2%; /* #323235 */
+    --ring: var(--foreground);
 
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 93%;
-
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 93%;
-
-    --primary: 210 100% 60%;
-    --primary-foreground: 0 0% 3.1%;
-
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 70%;
-
-    --muted: 0 0% 8%;
-    --muted-foreground: 0 0% 50%;
-
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 93%;
-
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 93%;
-
-    --border: 0 0% 13.3%;
-    --input: 0 0% 13.3%;
-    --ring: 210 100% 60%;
-
+    --input: var(--border);
+    --card: var(--background);
+    --card-foreground: var(--foreground);
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
+    --primary: var(--foreground);
+    --primary-foreground: var(--background);
+    --secondary: var(--border);
+    --secondary-foreground: var(--foreground);
+    --muted: var(--border);
+    --accent: var(--border);
+    --accent-foreground: var(--foreground);
+    --destructive: 0 62% 50%;
+    --destructive-foreground: var(--foreground);
     --radius: 0.25rem;
 
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 70%;
-    --sidebar-primary: 210 100% 60%;
-    --sidebar-primary-foreground: 0 0% 3.1%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 0 0% 93%;
-    --sidebar-border: 0 0% 13.3%;
-    --sidebar-ring: 210 100% 60%;
-
-    --text-dimmed: 0 0% 50%;
-    --text-bright: 0 0% 100%;
-    --border-subtle: 0 0% 13.3%;
-    --surface-raised: 0 0% 6%;
-
-    --font-mono: "JetBrains Mono", monospace;
-    --font-sans: "Inter", sans-serif;
-
-    /* Terminal colors */
-    --terminal-bg: 0 0% 4%;
-    --terminal-header: 0 0% 7%;
-    --terminal-green: 142 70% 55%;
-    --terminal-yellow: 45 90% 55%;
-    --terminal-red: 0 72% 50%;
-    --terminal-error: 0 62% 60%;
-    --terminal-system: 210 60% 55%;
+    --sidebar-background: var(--background);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-primary: var(--foreground);
+    --sidebar-primary-foreground: var(--background);
+    --sidebar-accent: var(--border);
+    --sidebar-accent-foreground: var(--foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--foreground);
   }
 
-  .dark {
-    --background: 0 0% 3.1%;
-    --foreground: 0 0% 93%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 93%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 93%;
-    --primary: 210 100% 60%;
-    --primary-foreground: 0 0% 3.1%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 70%;
-    --muted: 0 0% 8%;
-    --muted-foreground: 0 0% 50%;
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 93%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 93%;
-    --border: 0 0% 13.3%;
-    --input: 0 0% 13.3%;
-    --ring: 210 100% 60%;
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 70%;
-    --sidebar-primary: 210 100% 60%;
-    --sidebar-primary-foreground: 0 0% 3.1%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 0 0% 93%;
-    --sidebar-border: 0 0% 13.3%;
-    --sidebar-ring: 210 100% 60%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   html {
-    @apply dark;
-    scroll-behavior: smooth;
+    color-scheme: dark;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: var(--font-sans);
+    @apply bg-background font-sans text-foreground antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-mono);
-  }
-
-  code, pre {
-    font-family: var(--font-mono);
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--border));
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground));
-  }
-
-  /* Hide scrollbar utility */
-  .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Focus visible for accessibility */
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
-
-/* ============================================================
-   COMPONENTS
-   ============================================================ */
 
 @layer components {
-  /* Tab navigation */
-  .tab-item {
-    @apply px-4 py-2 font-mono text-sm text-muted-foreground border-b border-transparent transition-colors;
+  .link {
+    color: hsl(var(--foreground));
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--border));
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms;
   }
 
-  .tab-item:hover {
-    @apply text-foreground;
+  .link:hover {
+    text-decoration-color: currentColor;
   }
-
-  .tab-item.active {
-    @apply text-foreground border-b-primary;
-  }
-
-  /* Text link */
-  .text-link {
-    @apply text-primary hover:underline font-mono text-sm cursor-pointer transition-colors;
-  }
-
-  /* Tag/badge */
-  .tech-tag {
-    @apply inline-block font-mono text-xs px-2 py-0.5 border border-border text-muted-foreground mr-2 mb-1;
-  }
-}
-
-/* ============================================================
-   CURSOR BLINK
-   ============================================================ */
-
-.cursor-blink::after {
-  content: "▌";
-  display: inline-block;
-  margin-left: 2px;
-  color: hsl(var(--primary));
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ============================================================
-   PAGE TRANSITIONS
-   ============================================================ */
-
-.page-transition {
-  will-change: opacity, transform;
 }
 
 .page-transition-enter {
-  animation: pageEnter 0.3s ease-out forwards;
+  animation: page-fade 150ms ease-out;
 }
 
-@keyframes pageEnter {
+@keyframes page-fade {
   from {
     opacity: 0;
-    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Simple fade-in for content within pages */
-.page-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .page-transition-enter,
-  .page-fade-in,
-  .cursor-blink::after {
-    animation: none;
-  }
-}
-
-/* ============================================================
-   MICRO-INTERACTIONS
-   ============================================================ */
-
-/* Card hover — subtle left-border accent */
-.card-hover {
-  border-left: 2px solid transparent;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.card-hover:hover {
-  border-left-color: hsl(var(--primary));
-}
-
-/* Link hover — subtle shift */
-.link-hover {
-  transition: transform 0.15s ease, color 0.15s ease;
-}
-
-.link-hover:hover {
-  transform: translateX(2px);
-}
-
-/* ============================================================
-   TERMINAL
-   ============================================================ */
-
-.terminal-window {
-  background: hsl(var(--terminal-bg));
-  border: 1px solid hsl(var(--border));
-  overflow: hidden;
-  font-family: var(--font-mono);
-}
-
-.terminal-collapsed {
-  cursor: pointer;
-}
-
-.terminal-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: hsl(var(--terminal-header));
-  border-bottom: 1px solid hsl(var(--border));
-  user-select: none;
-}
-
-.terminal-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot-red {
-  background: hsl(var(--terminal-red));
-}
-
-.dot-yellow {
-  background: hsl(var(--terminal-yellow));
-}
-
-.dot-green {
-  background: hsl(var(--terminal-green));
-}
-
-.terminal-title {
-  flex: 1;
-  font-size: 11px;
-  color: hsl(var(--muted-foreground));
-  text-align: center;
-}
-
-.terminal-controls {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.terminal-toggle {
-  background: none;
-  border: none;
-  color: hsl(var(--muted-foreground));
-  font-size: 10px;
-  cursor: pointer;
-  padding: 2px 6px;
-  transition: color 0.15s ease;
-}
-
-.terminal-toggle:hover {
-  color: hsl(var(--foreground));
-}
-
-.terminal-body {
-  padding: 16px;
-  max-height: 360px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--border)) transparent;
-}
-
-/* Fullscreen terminal */
-.terminal-fullscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  border: none;
-  animation: terminalExpand 0.2s ease-out forwards;
-}
-
-.terminal-fullscreen .terminal-body {
-  flex: 1;
-  max-height: none;
-  padding: 24px;
-  font-size: 14px;
-}
-
-.terminal-fullscreen .terminal-line pre {
-  font-size: 14px;
-}
-
-.terminal-fullscreen .terminal-prompt {
-  font-size: 14px;
-}
-
-.terminal-fullscreen .terminal-input {
-  font-size: 14px;
-}
-
-.terminal-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 6px 16px;
-  border-top: 1px solid hsl(var(--border));
-  background: hsl(var(--terminal-header));
-}
-
-@keyframes terminalExpand {
-  from {
-    opacity: 0.8;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .terminal-fullscreen {
+  .page-transition-enter {
     animation: none;
-  }
-}
-
-.terminal-line pre {
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 0;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.terminal-input-type .terminal-line pre,
-.terminal-system pre {
-  color: hsl(var(--terminal-system));
-}
-
-.terminal-output pre {
-  color: hsl(var(--foreground) / 0.85);
-}
-
-.terminal-error pre {
-  color: hsl(var(--terminal-error));
-}
-
-.terminal-prompt {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.terminal-prompt-prefix {
-  color: hsl(var(--terminal-green));
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.terminal-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: hsl(var(--foreground));
-  font-family: var(--font-mono);
-  font-size: 13px;
-  caret-color: hsl(var(--primary));
-}
-
-/* ============================================================
-   COMMAND PALETTE
-   ============================================================ */
-
-.cmd-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  padding-top: min(20vh, 160px);
-  animation: overlayIn 0.15s ease-out;
-}
-
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.cmd-container {
-  width: 100%;
-  max-width: 560px;
-  max-height: 420px;
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  animation: cmdSlideIn 0.15s ease-out;
-  margin: 0 16px;
-  align-self: flex-start;
-}
-
-@keyframes cmdSlideIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.cmd-input-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-bottom: 1px solid hsl(var(--border));
-}
-
-.cmd-input-icon {
-  color: hsl(var(--muted-foreground));
-  flex-shrink: 0;
-}
-
-.cmd-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: hsl(var(--foreground));
-  font-family: var(--font-mono);
-  font-size: 14px;
-}
-
-.cmd-input::placeholder {
-  color: hsl(var(--muted-foreground));
-}
-
-.cmd-kbd {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 2px 6px;
-  background: hsl(var(--muted));
-  border: 1px solid hsl(var(--border));
-  color: hsl(var(--muted-foreground));
-  line-height: 1;
-}
-
-.cmd-list {
-  overflow-y: auto;
-  padding: 8px;
-  max-height: 340px;
-}
-
-.cmd-empty {
-  padding: 24px 16px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: hsl(var(--muted-foreground));
-}
-
-.cmd-group {
-  margin-bottom: 8px;
-}
-
-.cmd-group [cmdk-group-heading] {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: hsl(var(--muted-foreground));
-  padding: 4px 8px 6px;
-}
-
-.cmd-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: hsl(var(--foreground) / 0.85);
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-
-.cmd-item:hover,
-.cmd-item[data-selected="true"] {
-  background: hsl(var(--muted));
-}
-
-.cmd-item svg {
-  color: hsl(var(--muted-foreground));
-  flex-shrink: 0;
-}
-
-/* ============================================================
-   KBD HINT (bottom-right shortcut reminder)
-   ============================================================ */
-
-.kbd-hint {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 30;
-  transition: opacity 0.5s ease;
-}
-
-.kbd-hint-visible {
-  opacity: 1;
-}
-
-.kbd-hint-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ============================================================
-   GITHUB ACTIVITY
-   ============================================================ */
-
-.github-activity-row {
-  transition: background-color 0.15s ease;
-}
-
-.github-activity-row:hover {
-  background: hsl(var(--muted) / 0.5);
-}
-
-.github-pulse {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: hsl(var(--terminal-green));
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media (max-width: 640px) {
-  .terminal-body {
-    max-height: 280px;
-    padding: 12px;
-  }
-
-  .terminal-line pre {
-    font-size: 12px;
-  }
-
-  .terminal-prompt {
-    font-size: 12px;
-  }
-
-  .cmd-container {
-    max-height: 70vh;
-  }
-
-  .kbd-hint {
-    display: none;
   }
 }

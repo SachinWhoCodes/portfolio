@@ -1,18 +1,24 @@
-import { TabNavigation } from "./TabNavigation";
-import { CommandPalette } from "@/components/CommandPalette";
-import { KbdHint } from "@/components/KbdHint";
+import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 interface LayoutProps {
+  back?: { to: string; label: string };
+  className?: string;
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ back, className, children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
-      <TabNavigation />
-      <main className="container py-12">{children}</main>
-      <CommandPalette />
-      <KbdHint />
-    </div>
+    <main className={cn("mx-auto max-w-[36rem] px-6 pt-24 pb-24", className)}>
+      {back && (
+        <Link
+          to={back.to}
+          className="link mb-8 inline-block font-mono text-[0.8125rem] text-meta"
+        >
+          ← {back.label}
+        </Link>
+      )}
+      {children}
+    </main>
   );
 }

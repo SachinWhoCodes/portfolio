@@ -65,6 +65,7 @@ export default {
         bright: "hsl(var(--text-bright))",
         subtle: "hsl(var(--border-subtle))",
         raised: "hsl(var(--surface-raised))",
+        meta: "hsl(var(--meta))",
       },
       borderRadius: {
         lg: "var(--radius)",
