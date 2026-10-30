@@ -5,6 +5,7 @@ export interface Experience {
   date: string;
   location: string;
   summary: string;
+  highlights: [string, string];
   details: string[];
   techStack: string[];
   hardPart?: {
@@ -23,6 +24,10 @@ export const experiences: Experience[] = [
     location: "Gwalior, India",
     summary:
       "Building core backend infrastructure for a social platform serving 13.8M users — payment systems, content architecture, and real-time engagement pipelines.",
+    highlights: [
+      "Backend for a social platform with 13.8M users",
+      "Idempotent payments and a double-entry ledger",
+    ],
     details: [
       "Built a creator monetization subsystem with idempotent Razorpay flows, HMAC-SHA256 verification, row locking, transactional wallet transfers, and an append-style double-entry ledger guaranteeing zero duplicate charges.",
       "Engineered an 8-service Node.js/Express backend serving 13.8M users behind a path-based API gateway, backed by a 41-table PostgreSQL schema with 63 indexes including partial, GIN, and compound cursor indexes.",
@@ -54,6 +59,10 @@ export const experiences: Experience[] = [
     location: "New Delhi, India",
     summary:
       "Built the core infrastructure for Drippr Seller, a merchant dashboard used by 500+ merchants that bridges operations with the Shopify ecosystem.",
+    highlights: [
+      "Seller dashboard used by 500+ merchants",
+      "Real-time Shopify order routing via webhooks",
+    ],
     details: [
       "Built the Drippr Seller merchant dashboard end-to-end with a Vite + React + Tailwind UI, a stateless serverless API on Vercel, and Firestore onSnapshot live data sync.",
       "Engineered the order-routing pipeline that ingests Shopify webhooks, groups line items by merchant, and mirrors them into Firestore, handling thousands of orders daily in real time.",
@@ -78,6 +87,10 @@ export const experiences: Experience[] = [
     location: "Delhi, India",
     summary:
       "Led a team of 6 for end-to-end development of a multi-phase, contract-based software project, delivering a scalable and modular application.",
+    highlights: [
+      "Led a team of 6 across a multi-phase build",
+      "React Native and Appwrite, delivered on schedule",
+    ],
     details: [
       "Architected and implemented robust frontend (React Native, React.js) and backend (Appwrite, Node.js) systems with a focus on performance and maintainability.",
       "Drove technical planning, system architecture, and phase-wise delivery, consistently meeting or exceeding timelines.",
@@ -100,6 +113,10 @@ export const experiences: Experience[] = [
     location: "Remote",
     summary:
       "Developed a cross-platform mobile application for a hotel client with real-time room booking and food ordering across multiple branches.",
+    highlights: [
+      "Hotel booking and food ordering mobile app",
+      "Real-time orders across multiple branches",
+    ],
     details: [
       "Designed and implemented complete frontend and backend architecture using React Native, Expo Router, and Firebase Firestore.",
       "Developed real-time room reservation and food delivery workflows, including status updates and timestamped actions.",
@@ -123,6 +140,10 @@ export const experiences: Experience[] = [
     location: "India",
     summary:
       "Building a small infrastructure & applied AI company shipping developer tools (LazyServe, QueryMesh) and research prototypes (Assembly AI Lab).",
+    highlights: [
+      "Open-source developer tools, LazyServe on npm",
+      "Grew from an edtech platform with 3,000+ users",
+    ],
     details: [
       "Evolved from an edtech platform (3,000+ users, 12-member team) into an infrastructure company shipping open-source developer tools.",
       "Published LazyServe on npm (v1.0.3, MIT, 1,000+ downloads) — a CLI that wakes local dev servers on demand and sleeps them on idle.",
@@ -149,6 +170,10 @@ export const experiences: Experience[] = [
     location: "Gwalior, India",
     summary:
       "Designed and implemented 17 fully responsive web pages with a 25% reduction in average load times.",
+    highlights: [
+      "17 responsive pages, 25% faster load times",
+      "User satisfaction up from 3.4 to 4.0",
+    ],
     details: [
       "Built 17 responsive and interactive web pages, optimizing performance and resource loading for a 25% reduction in load times (1.2 seconds faster).",
       "Enhanced cross-device responsiveness, delivering seamless experience across mobile and tablet viewports.",

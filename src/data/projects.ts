@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   date: string;
   summary: string;
+  highlights: [string, string];
   details: string[];
   techStack: string[];
   role?: string;
@@ -16,11 +17,15 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "packshell",
-    title: "PackShell: Zero-Trust .env Sync CLI",
+    title: "PackShell",
     date: "2025",
     role: "Solo Developer",
     summary:
       "A CLI tool that synchronizes environment variables across teams with client-side AES-256-GCM encryption — the server never sees plaintext secrets.",
+    highlights: [
+      "Zero-trust .env sync CLI, published on npm",
+      "AES-256-GCM in the client, RSA-OAEP key sharing",
+    ],
     details: [
       "Designed a zero-trust architecture where all encryption happens client-side with AES-256-GCM authenticated encryption before any data leaves the machine.",
       "Built a hybrid cryptographic key model: a symmetric project key encrypts payloads, and RSA-OAEP-4096 distributes that key to teammates via per-user public-key encryption with fingerprint verification.",
@@ -51,11 +56,15 @@ export const projects: Project[] = [
   },
   {
     id: "sagit",
-    title: "SAGIT: Semantic Git Analysis Tool",
+    title: "SAGIT",
     date: "2025",
     role: "Project Lead — Research under HOD, Dept. of IT, MITS",
     summary:
       "A Java CLI that extends Git with AST-based semantic diff analysis, detecting structural code changes that text-based diffs miss entirely.",
+    highlights: [
+      "Git diffs that understand code, not just lines",
+      "AST diff engine on JGit, research paper submitted",
+    ],
     details: [
       "Built an AST-based diff engine that detects semantic code deltas (renames, signature changes, structural moves) by traversing JGit revision trees and comparing nodes via a custom AST comparator.",
       "Exposed a Picocli CLI and a Git pre-commit hook that auto-generates structured commit documentation from detected deltas, cutting manual documentation effort.",
@@ -75,11 +84,15 @@ export const projects: Project[] = [
   },
   {
     id: "lazyserve",
-    title: "LazyServe: On-Demand Dev Server Proxy",
+    title: "LazyServe",
     date: "2025",
     role: "Open Source Maintainer",
     summary:
       "A Fastify proxy that wakes local dev servers on demand and sleeps them on idle, keeping public tunnel URLs alive without burning resources.",
+    highlights: [
+      "Wakes dev servers on request, sleeps them on idle",
+      "Open source on npm, 1,000+ downloads",
+    ],
     details: [
       "Published on npm (v1.0.3, MIT license, 1,000+ downloads) as an open-source developer tool.",
       "Uses child process lifecycle control to start dev servers only when incoming requests arrive, and suspends them after a configurable idle timeout.",
@@ -103,11 +116,15 @@ export const projects: Project[] = [
   },
   {
     id: "assessment-platform",
-    title: "Multi-Tenant Fault-Tolerant Assessment Platform",
+    title: "Assessment Platform",
     date: "2025",
     role: "Project Lead",
     summary:
       "A scalable SaaS platform supporting 1,000+ concurrent users with 100% exam resume success rate through dual-layer persistence.",
+    highlights: [
+      "Exam platform for 1,000+ concurrent users",
+      "Dual-layer persistence, 100% exam resume",
+    ],
     details: [
       "Architected a sharded Firebase backend with Firestore transactions and optimized React listeners to support 1,000+ concurrent exam takers.",
       "Built a fault-tolerant runtime that eliminated data loss through a dual-layer persistence strategy (Server Sync + Local Storage), achieving 100% exam resume success.",
@@ -123,11 +140,15 @@ export const projects: Project[] = [
   },
   {
     id: "hotel-saas",
-    title: "Cross-Platform Hotel Booking & Food Order System",
+    title: "Hotel Booking App",
     date: "Jun 2025",
     role: "Freelance Developer (Upwork)",
     summary:
       "Mobile SaaS for real-time hotel bookings and food ordering across multi-branch operations, with offline-friendly architecture.",
+    highlights: [
+      "Room booking and food ordering across branches",
+      "React Native app built for an Upwork client",
+    ],
     details: [
       "Designed and implemented complete frontend and backend architecture using React Native, Expo Router, and Firebase Firestore.",
       "Developed real-time room reservation and food delivery workflows with status updates and timestamped actions across multiple branches.",
