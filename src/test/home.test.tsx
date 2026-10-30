@@ -33,6 +33,17 @@ describe("home", () => {
     expect(resume).not.toHaveAttribute("target");
   });
 
+  it("hero image layers are decorative", () => {
+    const { container } = renderAt("/");
+    const images = [...container.querySelectorAll("img")];
+    expect(images.map((img) => img.getAttribute("src"))).toEqual([
+      expect.stringMatching(/haze\.webp$/),
+      expect.stringMatching(/planet\.webp$/),
+      expect.stringMatching(/portrait\.webp$/),
+    ]);
+    for (const img of images) expect(img).toHaveAttribute("alt", "");
+  });
+
   it("links to the three sections", () => {
     renderAt("/");
     expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute("href", "/projects");
